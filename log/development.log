@@ -1,0 +1,274 @@
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "roles"[0m
+  ↳ db/schema.rb:15
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ db/schema.rb:15
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "roles" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "resource_type" varchar, "resource_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/schema.rb:15
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE  INDEX "index_roles_on_name_and_resource_type_and_resource_id" ON "roles" ("name", "resource_type", "resource_id")[0m
+  ↳ db/schema.rb:15
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE  INDEX "index_roles_on_name" ON "roles" ("name")[0m
+  ↳ db/schema.rb:15
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE  INDEX "index_roles_on_resource_type_and_resource_id" ON "roles" ("resource_type", "resource_id")[0m
+  ↳ db/schema.rb:15
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "sns_credentials"[0m
+  ↳ db/schema.rb:26
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "sns_credentials" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "provider" varchar, "uid" varchar, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/schema.rb:26
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE  INDEX "index_sns_credentials_on_user_id" ON "sns_credentials" ("user_id")[0m
+  ↳ db/schema.rb:26
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "user_properties"[0m
+  ↳ db/schema.rb:35
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "user_properties" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "nickname" varchar, "zip" varchar, "address" varchar, "telephone" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/schema.rb:35
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  ↳ db/schema.rb:45
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar, "confirmation_token" varchar, "confirmed_at" datetime, "confirmation_sent_at" datetime, "unconfirmed_email" varchar, "failed_attempts" integer DEFAULT 0 NOT NULL, "unlock_token" varchar, "locked_at" datetime, "full_name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/schema.rb:45
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_confirmation_token" ON "users" ("confirmation_token")[0m
+  ↳ db/schema.rb:45
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  ↳ db/schema.rb:45
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  ↳ db/schema.rb:45
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_unlock_token" ON "users" ("unlock_token")[0m
+  ↳ db/schema.rb:45
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users_roles"[0m
+  ↳ db/schema.rb:72
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "users_roles" ("user_id" integer, "role_id" integer)[0m
+  ↳ db/schema.rb:72
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE  INDEX "index_users_roles_on_role_id" ON "users_roles" ("role_id")[0m
+  ↳ db/schema.rb:72
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE  INDEX "index_users_roles_on_user_id_and_role_id" ON "users_roles" ("user_id", "role_id")[0m
+  ↳ db/schema.rb:72
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE  INDEX "index_users_roles_on_user_id" ON "users_roles" ("user_id")[0m
+  ↳ db/schema.rb:72
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20190723042322)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20190708020112),
+(20190708070903),
+(20190708010729);
+
+[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-10-14 03:22:51.917231"], ["updated_at", "2019-10-14 03:22:51.917231"]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ /Users/dangtranhongphuc/.rbenv/versions/2.5.1/bin/rake:23
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/dangtranhongphuc/.rbenv/versions/2.5.1/bin/rake:23
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/dangtranhongphuc/.rbenv/versions/2.5.1/bin/rake:23
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "roles"[0m
+  ↳ db/schema.rb:15
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ db/schema.rb:15
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "roles" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "resource_type" varchar, "resource_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/schema.rb:15
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX "index_roles_on_name_and_resource_type_and_resource_id" ON "roles" ("name", "resource_type", "resource_id")[0m
+  ↳ db/schema.rb:15
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX "index_roles_on_name" ON "roles" ("name")[0m
+  ↳ db/schema.rb:15
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX "index_roles_on_resource_type_and_resource_id" ON "roles" ("resource_type", "resource_id")[0m
+  ↳ db/schema.rb:15
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "sns_credentials"[0m
+  ↳ db/schema.rb:26
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "sns_credentials" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "provider" varchar, "uid" varchar, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/schema.rb:26
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX "index_sns_credentials_on_user_id" ON "sns_credentials" ("user_id")[0m
+  ↳ db/schema.rb:26
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "user_properties"[0m
+  ↳ db/schema.rb:35
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "user_properties" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "nickname" varchar, "zip" varchar, "address" varchar, "telephone" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/schema.rb:35
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  ↳ db/schema.rb:45
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar, "confirmation_token" varchar, "confirmed_at" datetime, "confirmation_sent_at" datetime, "unconfirmed_email" varchar, "failed_attempts" integer DEFAULT 0 NOT NULL, "unlock_token" varchar, "locked_at" datetime, "full_name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/schema.rb:45
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_confirmation_token" ON "users" ("confirmation_token")[0m
+  ↳ db/schema.rb:45
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  ↳ db/schema.rb:45
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  ↳ db/schema.rb:45
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_unlock_token" ON "users" ("unlock_token")[0m
+  ↳ db/schema.rb:45
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users_roles"[0m
+  ↳ db/schema.rb:72
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "users_roles" ("user_id" integer, "role_id" integer)[0m
+  ↳ db/schema.rb:72
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX "index_users_roles_on_role_id" ON "users_roles" ("role_id")[0m
+  ↳ db/schema.rb:72
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX "index_users_roles_on_user_id_and_role_id" ON "users_roles" ("user_id", "role_id")[0m
+  ↳ db/schema.rb:72
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX "index_users_roles_on_user_id" ON "users_roles" ("user_id")[0m
+  ↳ db/schema.rb:72
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20190723042322)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20190708020112),
+(20190708070903),
+(20190708010729);
+
+[0m
+  ↳ db/schema.rb:13
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-10-14 03:22:51.961927"], ["updated_at", "2019-10-14 03:22:51.961927"]]
+  ↳ db/schema.rb:13
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ /Users/dangtranhongphuc/.rbenv/versions/2.5.1/bin/rake:23
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/dangtranhongphuc/.rbenv/versions/2.5.1/bin/rake:23
+  [1m[36mActiveRecord::InternalMetadata Update (0.2ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = ?, "updated_at" = ? WHERE "ar_internal_metadata"."key" = ?[0m  [["value", "test"], ["updated_at", "2019-10-14 03:22:51.964019"], ["key", "environment"]]
+  ↳ /Users/dangtranhongphuc/.rbenv/versions/2.5.1/bin/rake:23
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/dangtranhongphuc/.rbenv/versions/2.5.1/bin/rake:23
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/dangtranhongphuc/.rbenv/versions/2.5.1/bin/rake:23
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:15
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "takeshi.mori@o-g.co.jp"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:15
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "confirmed_at", "full_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "takeshi.mori@o-g.co.jp"], ["encrypted_password", "$2a$11$7oT09yFkftLI.fyNmVekCed.WU.TbefYKSp/vWG3w.ALe/vnPFCgi"], ["confirmed_at", "2019-10-14 03:22:52.085107"], ["full_name", "Takeshi Mori"], ["created_at", "2019-10-14 03:22:52.086402"], ["updated_at", "2019-10-14 03:22:52.086402"]]
+  ↳ db/seeds.rb:15
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:15
+  [1m[36mRole Load (0.1ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = ? AND "roles"."resource_type" IS NULL AND "roles"."resource_id" IS NULL ORDER BY "roles"."id" ASC LIMIT ?[0m  [["name", "admin"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:16
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:16
+  [1m[36mRole Create (0.3ms)[0m  [1m[32mINSERT INTO "roles" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "admin"], ["created_at", "2019-10-14 03:22:52.096973"], ["updated_at", "2019-10-14 03:22:52.096973"]]
+  ↳ db/seeds.rb:16
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:16
+  [1m[36mRole Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = ? AND "roles"."id" = ? LIMIT ?[0m  [["user_id", 1], ["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:16
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "roles"."id" FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = ?[0m  [["user_id", 1]]
+  ↳ db/seeds.rb:16
+  [1m[36mRole Load (0.1ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ?[0m  [["id", 1]]
+  ↳ db/seeds.rb:16
+  [1m[36mRole Load (0.1ms)[0m  [1m[34mSELECT "roles".* FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = ?[0m  [["user_id", 1]]
+  ↳ db/seeds.rb:16
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:16
+  [1m[36mUser::HABTM_Roles Create (0.3ms)[0m  [1m[32mINSERT INTO "users_roles" ("user_id", "role_id") VALUES (?, ?)[0m  [["user_id", 1], ["role_id", 1]]
+  ↳ db/seeds.rb:16
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:16
+  [1m[36mRole Load (0.1ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = ? AND "roles"."resource_type" IS NULL AND "roles"."resource_id" IS NULL ORDER BY "roles"."id" ASC LIMIT ?[0m  [["name", "operator"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:17
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:17
+  [1m[36mRole Create (0.2ms)[0m  [1m[32mINSERT INTO "roles" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "operator"], ["created_at", "2019-10-14 03:22:52.116936"], ["updated_at", "2019-10-14 03:22:52.116936"]]
+  ↳ db/seeds.rb:17
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:17
+  [1m[36mRole Load (0.1ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" IN (?, ?)[0m  [["id", 1], ["id", 2]]
+  ↳ db/seeds.rb:17
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:17
+  [1m[36mUser::HABTM_Roles Create (0.2ms)[0m  [1m[32mINSERT INTO "users_roles" ("user_id", "role_id") VALUES (?, ?)[0m  [["user_id", 1], ["role_id", 2]]
+  ↳ db/seeds.rb:17
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:17
+  [1m[36mRole Load (0.1ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = ? AND "roles"."resource_type" IS NULL AND "roles"."resource_id" IS NULL ORDER BY "roles"."id" ASC LIMIT ?[0m  [["name", "user"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:18
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:18
+  [1m[36mRole Create (0.2ms)[0m  [1m[32mINSERT INTO "roles" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "user"], ["created_at", "2019-10-14 03:22:52.121729"], ["updated_at", "2019-10-14 03:22:52.121729"]]
+  ↳ db/seeds.rb:18
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:18
+  [1m[36mRole Load (0.1ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" IN (?, ?, ?)[0m  [["id", 1], ["id", 2], ["id", 3]]
+  ↳ db/seeds.rb:18
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:18
+  [1m[36mUser::HABTM_Roles Create (0.2ms)[0m  [1m[32mINSERT INTO "users_roles" ("user_id", "role_id") VALUES (?, ?)[0m  [["user_id", 1], ["role_id", 3]]
+  ↳ db/seeds.rb:18
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:18
+  [1m[36mRole Load (0.1ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = ? AND "roles"."resource_type" IS NULL AND "roles"."resource_id" IS NULL ORDER BY "roles"."id" ASC LIMIT ?[0m  [["name", "customer"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:19
+  [1m[36mRole Create (0.2ms)[0m  [1m[32mINSERT INTO "roles" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "customer"], ["created_at", "2019-10-14 03:22:52.126171"], ["updated_at", "2019-10-14 03:22:52.126171"]]
+  ↳ db/seeds.rb:19
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:19
+  [1m[36mRole Load (0.1ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4]]
+  ↳ db/seeds.rb:19
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:19
+  [1m[36mUser::HABTM_Roles Create (0.2ms)[0m  [1m[32mINSERT INTO "users_roles" ("user_id", "role_id") VALUES (?, ?)[0m  [["user_id", 1], ["role_id", 4]]
+  ↳ db/seeds.rb:19
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:27
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "zerowired.xb12s@gmail.com"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:27
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "confirmed_at", "full_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "zerowired.xb12s@gmail.com"], ["encrypted_password", "$2a$11$qxCJpNj4cgk/1uEMzjPFiOdtgpUvkwKRloI32mYS65Z2Pj3nmXkJe"], ["confirmed_at", "2019-10-14 03:22:52.229810"], ["full_name", "Takeshi Mori"], ["created_at", "2019-10-14 03:22:52.230786"], ["updated_at", "2019-10-14 03:22:52.230786"]]
+  ↳ db/seeds.rb:27
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:27
+  [1m[36mRole Load (0.1ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = ? AND "roles"."resource_type" IS NULL AND "roles"."resource_id" IS NULL ORDER BY "roles"."id" ASC LIMIT ?[0m  [["name", "operator"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mRole Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = ? AND "roles"."id" = ? LIMIT ?[0m  [["user_id", 2], ["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT "roles"."id" FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = ?[0m  [["user_id", 2]]
+  ↳ db/seeds.rb:28
+  [1m[36mRole Load (0.0ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" = ?[0m  [["id", 2]]
+  ↳ db/seeds.rb:28
+  [1m[36mRole Load (0.0ms)[0m  [1m[34mSELECT "roles".* FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = ?[0m  [["user_id", 2]]
+  ↳ db/seeds.rb:28
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:28
+  [1m[36mUser::HABTM_Roles Create (0.2ms)[0m  [1m[32mINSERT INTO "users_roles" ("user_id", "role_id") VALUES (?, ?)[0m  [["user_id", 2], ["role_id", 2]]
+  ↳ db/seeds.rb:28
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:28
+  [1m[36mRole Load (0.1ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = ? AND "roles"."resource_type" IS NULL AND "roles"."resource_id" IS NULL ORDER BY "roles"."id" ASC LIMIT ?[0m  [["name", "user"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:29
+  [1m[36mRole Load (0.1ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" IN (?, ?)[0m  [["id", 2], ["id", 3]]
+  ↳ db/seeds.rb:29
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:29
+  [1m[36mUser::HABTM_Roles Create (0.2ms)[0m  [1m[32mINSERT INTO "users_roles" ("user_id", "role_id") VALUES (?, ?)[0m  [["user_id", 2], ["role_id", 3]]
+  ↳ db/seeds.rb:29
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:29
+  [1m[36mRole Load (0.1ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = ? AND "roles"."resource_type" IS NULL AND "roles"."resource_id" IS NULL ORDER BY "roles"."id" ASC LIMIT ?[0m  [["name", "customer"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:30
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."id" IN (?, ?, ?)[0m  [["id", 2], ["id", 3], ["id", 4]]
+  ↳ db/seeds.rb:30
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:30
+  [1m[36mUser::HABTM_Roles Create (0.2ms)[0m  [1m[32mINSERT INTO "users_roles" ("user_id", "role_id") VALUES (?, ?)[0m  [["user_id", 2], ["role_id", 4]]
+  ↳ db/seeds.rb:30
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:30
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/dangtranhongphuc/.rbenv/versions/2.5.1/bin/rake:23

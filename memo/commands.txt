@@ -1,0 +1,83 @@
+Add devise
+    Gemfile =>
+        gem 'devise'
+Install devise
+    bundle exec rails g devise:install # generator
+    bundle exec rails g devise:views # deviseのviewをコピー
+    bundle exec rails g devise User # モデルを作成
+    bundle exec rails db:migrate
+    ===============================================================================
+    Some setup you must do manually if you haven't yet:
+      1. Ensure you have defined default url options in your environments files. Here
+         is an example of default_url_options appropriate for a development environment
+         in config/environments/development.rb:
+           config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+         In production, :host should be set to the actual host of your application.
+      2. Ensure you have defined root_url to *something* in your config/routes.rb.
+         For example:
+           root to: "home#index"
+      3. Ensure you have flash messages in app/views/layouts/application.html.erb.
+         For example:
+           <p class="notice"><%= notice %></p>
+           <p class="alert"><%= alert %></p>
+      4. You can copy Devise views (for customization) to your app by running:
+           rails g devise:views
+    ===============================================================================
+    Edit ApplicationController.rb
+        class ApplicationController < ActionController::Base
+          protect_from_forgery with: :exception
+          before_action :authenticate_user! # 追記 (userの部分はmodel名)
+        end
+    Custom controller
+        rails g devise:controllers users
+    ===============================================================================
+    Some setup you must do manually if you haven't yet:
+      Ensure you have overridden routes for generated controllers in your routes.rb.
+      For example:
+        Rails.application.routes.draw do
+          devise_for :users, controllers: {
+            sessions: 'users/sessions'
+          }
+        end
+    ===============================================================================
+Add cancancan/rolify
+    Gemfile =>
+        gem 'cancancan'
+        gem 'rolify'
+Add letter_opener
+    Gemfile => (group :development)
+        gem 'letter_opener'
+        gem 'letter_opener_web'
+Add pages for auth test
+    rails generate controller AuthTest
+        => controllers/auth_test
+    Add erb =>
+        views/auth_test/need_auth.erb
+        views/auth_test/not_need_auth.erb
+    Edit routes.rb
+          get 'auth_test/need_auth', :controller => 'auth_test', :action => 'need_auth'
+          post 'auth_test/need_auth', :controller => 'auth_test', :action => 'need_auth'
+          get 'auth_test/not_need_auth', :controller => 'auth_test', :action => 'not_need_auth'
+          post 'auth_test/not_need_auth', :controller => 'auth_test', :action => 'not_need_auth'
+    Edit auth_test_controller.rb
+          def need_auth
+          end
+          def not_need_auth
+          end
+Add xxxauth
+    Gemfile =>
+        gem 'omniauth-facebook'
+        gem 'omniauth-twitter'
+        gem 'omniauth-google-oauth2'
+
+    https://qiita.com/hidepino/items/a1eb9d2f32ce33389f20
+    bundle exec rails g model sns_credential provider:string uid:string user:references
+    bundle exec rake db:migrate
+    Google
+        Client ID : 473951703191-5k5p0dn9fgkuviobfs591h8votaepjgb.apps.googleusercontent.com
+        Client secret : KhtfHrEp-wzFWNAIF8rLOSby
+    Facebook
+        App ID : 292651861535483
+        App Secret : df3c88e3c9f10fac22e9c114ca4802f8
+
+    https://qiita.com/natsukingdom-yamaguchi/items/15142bd4ad77679afb04
